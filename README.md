@@ -16,7 +16,7 @@ This requires phonegap 7.1.0+ ( current stable v8.0.0 )
 
 It is also possible to install via repo url directly ( unstable )
 
-    phonegap plugin add https://github.com/phonegap/phonegap-plugin-barcodescanner.git
+    phonegap plugin add https://github.com/amiltonjr/phonegap-plugin-barcodescanner.git
 
 Optional variables:
 This plugin requires the Android support library v4. The minimum version is `24.1.0`. Default value is `27.+`.  Check out the latest version [here](https://developer.android.com/topic/libraries/support-library/revisions.html).
@@ -153,7 +153,7 @@ To add this entry you can use the `edit-config` tag in the `config.xml` like thi
 
 ## Thanks on Github ##
 
-So many -- check out the original [iOS](https://github.com/phonegap/phonegap-plugins/tree/DEPRECATED/iOS/BarcodeScanner),  [Android](https://github.com/phonegap/phonegap-plugins/tree/DEPRECATED/Android/BarcodeScanner) and
+So many -- check out the original [iOS](https://github.com/amiltonjr/phonegap-plugins/tree/DEPRECATED/iOS/BarcodeScanner),  [Android](https://github.com/amiltonjr/phonegap-plugins/tree/DEPRECATED/Android/BarcodeScanner) and
 [BlackBerry 10](https://github.com/blackberry/WebWorks-Community-APIs/tree/master/BB10-Cordova/BarcodeScanner) repos.
 
 ## Licence ##
