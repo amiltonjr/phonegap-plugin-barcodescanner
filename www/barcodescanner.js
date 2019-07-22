@@ -95,12 +95,12 @@ BarcodeScanner.prototype.scan = function (successCallback, errorCallback, config
             }
 
             if (typeof errorCallback != "function") {
-                console.log("BarcodeScanner.scan failure: failure parameter not a function");
+                console.error("BarcodeScanner.scan failure: failure parameter not a function");
                 return;
             }
 
             if (typeof successCallback != "function") {
-                console.log("BarcodeScanner.scan failure: success callback parameter must be a function");
+                console.error("BarcodeScanner.scan failure: success callback parameter must be a function");
                 return;
             }
 
@@ -138,12 +138,12 @@ BarcodeScanner.prototype.scan = function (successCallback, errorCallback, config
             }
 
             if (typeof errorCallback != "function") {
-                console.log("BarcodeScanner.encode failure: failure parameter not a function");
+                console.error("BarcodeScanner.encode failure: failure parameter not a function");
                 return;
             }
 
             if (typeof successCallback != "function") {
-                console.log("BarcodeScanner.encode failure: success callback parameter must be a function");
+                console.error("BarcodeScanner.encode failure: success callback parameter must be a function");
                 return;
             }
 
