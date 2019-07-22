@@ -16,9 +16,14 @@ function encode(type, data, success, errorCallback) {
     success();
 }
 
+function cancelCapture(success, error) {
+    success();
+}
+
 module.exports = {
     scan: scan,
-    encode: encode
+    encode: encode,
+    cancelCapture: cancelCapture
 };
 
-require("cordova/exec/proxy").add("BarcodeScanner",module.exports);
+require("cordova/exec/proxy").add("BarcodeScanner", module.exports);

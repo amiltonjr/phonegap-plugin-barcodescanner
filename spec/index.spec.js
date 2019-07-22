@@ -73,6 +73,20 @@ describe('phonegap-plugin-barcodescanner', function () {
                     done();
                 }, 100);
             });
+
+            it('should call cordova.exec on next process tick', function (done) {
+                BarcodeScanner.cancelCapture("", "",function() {}, function() {}, {});
+                setTimeout(function () {
+                    expect(execSpy).toHaveBeenCalledWith(
+                        jasmine.any(Function),
+                        jasmine.any(Function),
+                        'BarcodeScanner',
+                        'cancelCapture',
+                        jasmine.any(Object)
+                    );
+                    done();
+                }, 100);
+            });
         });
     });
 });
