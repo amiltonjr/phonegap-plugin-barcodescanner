@@ -11,19 +11,16 @@ package com.phonegap.plugins.barcodescanner;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.content.pm.PackageManager;
-
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.PluginResult;
 import org.apache.cordova.PermissionHelper;
-
 import com.google.zxing.client.android.CaptureActivity;
 import com.google.zxing.client.android.encode.EncodeActivity;
 import com.google.zxing.client.android.Intents;
@@ -38,6 +35,7 @@ public class BarcodeScanner extends CordovaPlugin {
 
     private static final String SCAN = "scan";
     private static final String ENCODE = "encode";
+    private static final String CANCEL_CAPTURE = "cancelCapture";
     private static final String CANCELLED = "cancelled";
     private static final String FORMAT = "format";
     private static final String TEXT = "text";
@@ -113,6 +111,8 @@ public class BarcodeScanner extends CordovaPlugin {
                 callbackContext.error("User did not specify data to encode");
                 return true;
             }
+        } else if (action.equals(CANCEL_CAPTURE)) {
+            cancelCapture();
         } else if (action.equals(SCAN)) {
 
             //android permission auto add
@@ -124,6 +124,7 @@ public class BarcodeScanner extends CordovaPlugin {
         } else {
             return false;
         }
+
         return true;
     }
 
@@ -180,17 +181,22 @@ public class BarcodeScanner extends CordovaPlugin {
                         intentScan.putExtra(Intents.Scan.SHOW_TORCH_BUTTON, obj.optBoolean(SHOW_TORCH_BUTTON, false));
                         intentScan.putExtra(Intents.Scan.TORCH_ON, obj.optBoolean(TORCH_ON, false));
                         intentScan.putExtra(Intents.Scan.SAVE_HISTORY, obj.optBoolean(SAVE_HISTORY, false));
+                        
                         boolean beep = obj.optBoolean(DISABLE_BEEP, false);
                         intentScan.putExtra(Intents.Scan.BEEP_ON_SCAN, !beep);
+                        
                         if (obj.has(RESULTDISPLAY_DURATION)) {
                             intentScan.putExtra(Intents.Scan.RESULT_DISPLAY_DURATION_MS, "" + obj.optLong(RESULTDISPLAY_DURATION));
                         }
+                        
                         if (obj.has(FORMATS)) {
                             intentScan.putExtra(Intents.Scan.FORMATS, obj.optString(FORMATS));
                         }
+                        
                         if (obj.has(PROMPT)) {
                             intentScan.putExtra(Intents.Scan.PROMPT_MESSAGE, obj.optString(PROMPT));
                         }
+                        
                         if (obj.has(ORIENTATION)) {
                             intentScan.putExtra(Intents.Scan.ORIENTATION_LOCK, obj.optString(ORIENTATION));
                         }
@@ -261,6 +267,23 @@ public class BarcodeScanner extends CordovaPlugin {
         intentEncode.setPackage(this.cordova.getActivity().getApplicationContext().getPackageName());
 
         this.cordova.getActivity().startActivity(intentEncode);
+    }
+
+    /**
+     * Cancels a barcode scanning process
+     */
+    public void cancelCapture() {
+        try {
+            cordova.finishActivity(REQUEST_CODE);
+
+            if (callbackContext != null)
+                callbackContext.success("1");
+        } catch (Exception e) {
+            Log.e(LOG_TAG, "cancelCapture() Error: " + e.getLocalizedMessage());
+                    
+            if (callbackContext != null)
+                callbackContext.error("0");
+        }
     }
 
     /**

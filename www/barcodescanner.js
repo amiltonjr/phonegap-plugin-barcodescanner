@@ -152,5 +152,10 @@ BarcodeScanner.prototype.scan = function (successCallback, errorCallback, config
             ]);
         };
 
+        //-------------------------------------------------------------------
+        BarcodeScanner.prototype.cancelCapture = function(success, failure) {
+            exec(success, failure, 'BarcodeScanner', 'cancelCapture', []);
+        };
+
         var barcodeScanner = new BarcodeScanner();
         module.exports = barcodeScanner;
