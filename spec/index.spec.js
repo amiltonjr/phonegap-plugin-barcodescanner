@@ -36,6 +36,11 @@ describe('phonegap-plugin-barcodescanner', function () {
           expect(typeof BarcodeScanner.encode == 'function').toBe(true);
       });
 
+      it("should contain a cancelCapture function", function() {
+        expect(BarcodeScanner.cancelCapture).toBeDefined();
+        expect(typeof BarcodeScanner.cancelCapture == 'function').toBe(true);
+    });
+
       it("should contain three DestinationType constants", function() {
           expect(BarcodeScanner.Encode.TEXT_TYPE).toBe("TEXT_TYPE");
           expect(BarcodeScanner.Encode.EMAIL_TYPE).toBe("EMAIL_TYPE");
@@ -61,7 +66,7 @@ describe('phonegap-plugin-barcodescanner', function () {
             });
 
             it('should call cordova.exec on next process tick', function (done) {
-                BarcodeScanner.encode("", "",function() {}, function() {}, {});
+                BarcodeScanner.encode("", "", function() {}, function() {}, {});
                 setTimeout(function () {
                     expect(execSpy).toHaveBeenCalledWith(
                         jasmine.any(Function),
@@ -75,7 +80,7 @@ describe('phonegap-plugin-barcodescanner', function () {
             });
 
             it('should call cordova.exec on next process tick', function (done) {
-                BarcodeScanner.cancelCapture("", "",function() {}, function() {}, {});
+                BarcodeScanner.cancelCapture("", "", function() {}, function() {}, {});
                 setTimeout(function () {
                     expect(execSpy).toHaveBeenCalledWith(
                         jasmine.any(Function),
