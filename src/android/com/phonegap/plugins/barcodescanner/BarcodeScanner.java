@@ -274,15 +274,15 @@ public class BarcodeScanner extends CordovaPlugin {
      */
     public void cancelCapture() {
         try {
-            cordova.finishActivity(REQUEST_CODE);
+            this.cordova.getActivity().finishActivity(REQUEST_CODE);
 
-            if (callbackContext != null)
-                callbackContext.success("1");
+            if (this.callbackContext != null)
+                this.callbackContext.success("1");
         } catch (Exception e) {
             Log.e(LOG_TAG, "cancelCapture() Error: " + e.getLocalizedMessage());
                     
-            if (callbackContext != null)
-                callbackContext.error("0");
+            if (this.callbackContext != null)
+                this.callbackContext.error("0");
         }
     }
 
