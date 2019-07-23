@@ -154,6 +154,8 @@ BarcodeScanner.prototype.encode = function (type, data, successCallback, errorCa
 
 //-------------------------------------------------------------------
 BarcodeScanner.prototype.cancelCapture = function (successCallback, errorCallback) {
+    scanInProgress = false;
+    
     exec(successCallback, errorCallback, 'BarcodeScanner', 'cancelCapture', []);
 };
 
